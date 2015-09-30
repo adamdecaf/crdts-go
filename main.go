@@ -7,13 +7,16 @@ import (
 )
 
 func main() {
-	orset := crdts.OrSet {}
+	orset := crdts.OrSet{}
 
-	fmt.Println("crdt examples starting")
+	// Just add and remove ints
+	sum := orset.Add(1).Remove(3).Add(1).Add(2)
+	fmt.Printf("orset = %v, sum = %v\n", orset.Value(), sum.Value())
+	fmt.Printf("sum after = %v\n", sum)
 
-	merged := orset.Add(1).Remove(3).Add(1).Add(2)
-	fmt.Printf("orset = %v, merged = %v\n", orset.Value(), merged.Value())
-	fmt.Printf("merged after = %v\n", merged)
-
-	fmt.Println("crdt examples complete")
+	// Merge two OrSets
+	orset2 := crdts.OrSet{}
+	sum2 := orset2.Add(10).Remove(5).Add(-1).Add(6).Remove(2)
+	merged := sum.Merge(sum2)
+	fmt.Printf("merged = %v, total = %v\n", merged.Value(), merged)
 }

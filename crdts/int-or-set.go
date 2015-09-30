@@ -42,6 +42,15 @@ func (o OrSet) Remove(inc int) OrSet {
 	return res
 }
 
+func (o OrSet) Merge(other OrSet) OrSet {
+	st := OrSet {
+		Additions: append(o.Additions, other.Additions...),
+		Removals: append(o.Removals, other.Removals...),
+	}
+
+	return st
+}
+
 func (o OrSet) Value() int {
 	var sum = 0
 
