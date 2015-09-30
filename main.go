@@ -7,17 +7,13 @@ import (
 )
 
 func main() {
-	orset1 := crdts.OrSet { Value: 1 }
-	orset2 := crdts.OrSet { Value: 2 }
+	orset := crdts.OrSet {}
 
 	fmt.Println("crdt examples starting")
 
-	merged, err := orset1.Add(&orset2)
-	if err != nil {
-		fmt.Printf("orset1 = %v, orset2 = %v, add = %v\n", orset1, orset2, merged)
-	} else {
-		fmt.Printf("Error while adding orset1 = %v, orset2 = %v\n", orset1, orset2)
-	}
+	merged := orset.Add(1).Remove(3).Add(1).Add(2)
+	fmt.Printf("orset = %v, merged = %v\n", orset.Value(), merged.Value())
+	fmt.Printf("merged after = %v\n", merged)
 
 	fmt.Println("crdt examples complete")
 }
